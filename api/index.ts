@@ -1,6 +1,6 @@
-import polka from 'polka';
-import { City, State, Country } from 'country-state-city';
+import { City, Country, State } from 'country-state-city';
 import helmet from 'helmet';
+import polka from 'polka';
 import bearerToken from 'polka-bearer-token';
 
 const app = polka();
@@ -20,8 +20,9 @@ app
     })
   )
   .use(bearerToken())
-  .use((req: any, res: any, next: any) => {
-    if (req.token !== process.env.TOKEN?.replace('Bearer ', '')) {
+  .use((req, res, next) => {
+    const token = (req as typeof req & { token: string }).token.replace('Bearer ', '');
+    if (token !== process.env.TOKEN) {
       res.statusCode = 401;
       res.end('Unauthorized');
     }
