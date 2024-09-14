@@ -11,9 +11,18 @@ importers:
       country-state-city:
         specifier: ^3.2.1
         version: 3.2.1
+      helmet:
+        specifier: ^7.1.0
+        version: 7.1.0
       polka:
         specifier: ^0.5.2
         version: 0.5.2
+      polka-bearer-token:
+        specifier: ^0.2.4
+        version: 0.2.4(polka@0.5.2)
+      tslib:
+        specifier: ^2.7.0
+        version: 2.7.0
     devDependencies:
       '@types/node':
         specifier: ^22.5.5
@@ -70,12 +79,37 @@ packages:
   '@types/trouter@3.1.4':
     resolution: {integrity: sha512-4YIL/2AvvZqKBWenjvEpxpblT2KGO6793ipr5QS7/6DpQ3O3SwZGgNGWezxf3pzeYZc24a2pJIrR/+Jxh/wYNQ==}
 
+  cookie-parser@1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==}
+    engines: {node: '>= 0.8.0'}
+
+  cookie-signature@1.0.6:
+    resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
+
+  cookie@0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==}
+    engines: {node: '>= 0.6'}
+
+  cookie@0.6.0:
+    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
+    engines: {node: '>= 0.6'}
+
   country-state-city@3.2.1:
     resolution: {integrity: sha512-kxbanqMc6izjhc/EHkGPCTabSPZ2G6eG4/97akAYHJUN4stzzFEvQPZoF8oXDQ+10gM/O/yUmISCR1ZVxyb6EA==}
+
+  helmet@7.1.0:
+    resolution: {integrity: sha512-g+HZqgfbpXdCkme/Cd/mZkV0aV3BZZZSugecH03kl38m/Kmdx8jKjBikpDj2cr+Iynv4KpYEviojNdTJActJAg==}
+    engines: {node: '>=16.0.0'}
 
   matchit@1.1.0:
     resolution: {integrity: sha512-+nGYoOlfHmxe5BW5tE0EMJppXEwdSf8uBA1GTZC7Q77kbT35+VKLYJMzVNWCHSsga1ps1tPYFtFyvxvKzWVmMA==}
     engines: {node: '>=6'}
+
+  polka-bearer-token@0.2.4:
+    resolution: {integrity: sha512-t/fzz8r8wzvXheRdR1ZYkfG8B9LeluXBs1YH4QekbSo3tmQPmWu+PiItHhxN0LRTov65E+kWwbbRluw5rS288w==}
+    engines: {node: ^18.18 || ^20.8 || ^21}
+    peerDependencies:
+      polka: '>=1.0.0-next'
 
   polka@0.5.2:
     resolution: {integrity: sha512-FVg3vDmCqP80tOrs+OeNlgXYmFppTXdjD5E7I4ET1NjvtNmQrb1/mJibybKkb/d4NA7YWAr1ojxuhpL3FHqdlw==}
@@ -83,6 +117,9 @@ packages:
   trouter@2.0.1:
     resolution: {integrity: sha512-kr8SKKw94OI+xTGOkfsvwZQ8mWoikZDd2n8XZHjJVZUARZT+4/VV6cacRS6CLsH9bNm+HFIPU1Zx4CnNnb4qlQ==}
     engines: {node: '>=6'}
+
+  tslib@2.7.0:
+    resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
@@ -148,11 +185,30 @@ snapshots:
 
   '@types/trouter@3.1.4': {}
 
+  cookie-parser@1.4.6:
+    dependencies:
+      cookie: 0.4.1
+      cookie-signature: 1.0.6
+
+  cookie-signature@1.0.6: {}
+
+  cookie@0.4.1: {}
+
+  cookie@0.6.0: {}
+
   country-state-city@3.2.1: {}
+
+  helmet@7.1.0: {}
 
   matchit@1.1.0:
     dependencies:
       '@arr/every': 1.0.1
+
+  polka-bearer-token@0.2.4(polka@0.5.2):
+    dependencies:
+      cookie: 0.6.0
+      cookie-parser: 1.4.6
+      polka: 0.5.2
 
   polka@0.5.2:
     dependencies:
@@ -162,5 +218,7 @@ snapshots:
   trouter@2.0.1:
     dependencies:
       matchit: 1.1.0
+
+  tslib@2.7.0: {}
 
   undici-types@6.19.8: {}

@@ -1,19 +1,25 @@
 import polka from 'polka';
 import { City, State, Country } from 'country-state-city';
-
-const checkToken = (req: any, res: any, next: any) => {
-  if (req.headers.authorization !== process.env.TOKEN) {
-    res.statusCode = 401;
-    res.end('Unauthorized');
-  }
-  next();
-};
+import helmet from 'helmet';
+import bearerToken from 'polka-bearer-token';
 
 const app = polka();
 const port = process.env.PORT || 3000;
 
 app
-  .use(checkToken)
+  .use(
+    helmet({
+      crossOriginResourcePolicy: false,
+    })
+  )
+  .use(bearerToken())
+  .use((req: any, res: any, next: any) => {
+    if (req.token !== process.env.TOKEN) {
+      res.statusCode = 401;
+      res.end('Unauthorized');
+    }
+    next();
+  })
   .get('/countries', (req, res) => {
     res.end(JSON.stringify(Country.getAllCountries()));
   })
