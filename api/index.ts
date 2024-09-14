@@ -43,9 +43,9 @@ app
   .get('/cities', (req, res) => {
     res.end(JSON.stringify(City.getCitiesOfState(req.query.country as string, req.query.state as string)));
   })
-  .get('/', (req, res) => {
-    res.statusCode = 401;
-    res.end('Unauthorized');
+  .get('*', (req, res) => {
+    res.statusCode = 404;
+    res.end(JSON.stringify({ message: 'Not Found', status: 404 }));
   });
 
 app.listen(port, () => {
