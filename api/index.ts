@@ -1,5 +1,5 @@
 import { City, Country, State } from 'country-state-city';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import polka from 'polka';
 import bearerToken from 'polka-bearer-token';
 
@@ -14,11 +14,11 @@ app
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
   })
-  .use(
-    helmet({
-      crossOriginResourcePolicy: false,
-    })
-  )
+  // .use(
+  //   helmet({
+  //     crossOriginResourcePolicy: false,
+  //   })
+  // )
   .use(bearerToken())
   .use((req, res, next) => {
     const token = (req as typeof req & { token: string }).token.replace('Bearer ', '');
