@@ -7,6 +7,13 @@ const app = polka();
 const port = process.env.PORT || 3000;
 
 app
+  .use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', 'https://opencommunities.info, http://localhost:5173');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  })
   .use(
     helmet({
       crossOriginResourcePolicy: false,
