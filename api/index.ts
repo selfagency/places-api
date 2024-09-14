@@ -21,7 +21,7 @@ app
   )
   .use(bearerToken())
   .use((req: any, res: any, next: any) => {
-    if (req.token !== process.env.TOKEN) {
+    if (req.token !== process.env.TOKEN?.replace('Bearer ', '')) {
       res.statusCode = 401;
       res.end('Unauthorized');
     }
