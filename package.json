@@ -15,6 +15,7 @@
     "polka": "^0.5.2"
   },
   "devDependencies": {
-    "@types/node": "^22.5.5"
+    "@types/node": "^22.5.5",
+    "@types/polka": "^0.5.7"
   }
 }

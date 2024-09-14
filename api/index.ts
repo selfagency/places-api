@@ -1,28 +1,39 @@
 import polka from 'polka';
 import { City, State, Country } from 'country-state-city';
 
-const checkToken = (req, res) => {
+const checkToken = (req: any, res: any, next: any) => {
   if (req.headers.authorization !== process.env.TOKEN) {
     res.statusCode = 401;
     res.end('Unauthorized');
-    return;
   }
+  next();
 };
 
-polka()
+const app = polka();
+const port = process.env.PORT || 3000;
+
+app
   .use(checkToken)
   .get('/countries', (req, res) => {
-    res.json(Country.getAllCountries());
+    res.end(JSON.stringify(Country.getAllCountries()));
   })
-  .get('/country', (req, res) => {
-    res.json(Country.getCountryByCode(req.query.country));
+  .get('/countries/:id', (req, res) => {
+    res.end(JSON.stringify(Country.getCountryByCode(req.params.id)));
   })
   .get('/states', (req, res) => {
-    res.json(State.getStatesOfCountry(req.query.country));
+    res.end(JSON.stringify(State.getStatesOfCountry(req.query.country as string)));
+  })
+  .get('/states/:id', (req, res) => {
+    res.end(JSON.stringify(State.getStateByCode(req.params.id)));
   })
   .get('/cities', (req, res) => {
-    res.json(City.getCitiesOfState(req.query.country, req.query.state));
+    res.end(JSON.stringify(City.getCitiesOfState(req.query.country as string, req.query.state as string)));
   })
-  .listen(3000, () => {
-    console.log(`Started`);
+  .get('/', (req, res) => {
+    res.statusCode = 401;
+    res.end('Unauthorized');
   });
+
+app.listen(port, () => {
+  console.log(`Started on ${port}`);
+});
