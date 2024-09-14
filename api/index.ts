@@ -24,7 +24,7 @@ app
     const token = (req as typeof req & { token: string }).token.replace('Bearer ', '');
     if (token !== process.env.TOKEN) {
       res.statusCode = 401;
-      res.end('Unauthorized');
+      res.end(JSON.stringify({ message: 'Unauthorized', status: 401 }));
     }
     next();
   })
